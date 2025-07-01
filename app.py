@@ -6,33 +6,30 @@ from datetime import datetime
 from decimal import Decimal
 import uuid
 import random
+
 app = Flask(__name__)
-app.secret_key = 'ksmadnaini1325r623e2vcdeyewcf'
+app.secret_key = 'burahan1216'
 
-# AWS DynamoDB Setup
-import os
-
-dynamodb = boto3.resource(
-    'dynamodb',
-    region_name='ap-south-1',
-    aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-    aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
-)
-
-sns_client = boto3.client(
-    'sns',
-    region_name='ap-south-1',
-    aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-    aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
-)
-
+# AWS Setup using IAM Role
+REGION = 'us-east-1'  # Replace with your actual AWS region
+dynamodb = boto3.resource('dynamodb', region_name=REGION)
+sns_client = boto3.client('sns', region_name=REGION)
 
 users_table = dynamodb.Table('travelgo_users')
 trains_table = dynamodb.Table('trains')
 bookings_table = dynamodb.Table('bookings')
 
+SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:353250843450:TravelGoBookingTopic'  # Replace with actual SNS topic ARN
 
-SNS_TOPIC_ARN = 'arn:aws:sns:ap-south-1:353250843450:TravelGoapplication:7c9c9b29-946e-4870-bcf0-0dd359c6cbcb'
+def send_sns_notification(subject, message):
+    try:
+        sns_client.publish(
+            TopicArn=SNS_TOPIC_ARN,
+            Subject=subject,
+            Message=message
+        )
+    except Exception as e:
+        print(f"SNS Error: {e}")
 
 
 def send_sns_notification(subject, message):
