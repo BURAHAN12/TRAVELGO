@@ -9,10 +9,6 @@ import random
 app = Flask(__name__)
 app.secret_key = 'ksmadnaini1325r623e2vcdeyewcf'
 
-from dotenv import load_dotenv
-load_dotenv()
-
-
 # AWS DynamoDB Setup
 import os
 
