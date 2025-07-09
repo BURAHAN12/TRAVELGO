@@ -4,184 +4,196 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hotel Booking - TravelGo</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #eef5ff;
       margin: 0;
-      padding: 0;
+      font-family: 'Verdana', sans-serif;
+      background: url('static/images/hotel.jpg');
+      background-size: cover;
+      color: #fff;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
     }
 
-    /* Navbar */
-    nav {
-      background-color: #004aad;
-      padding: 15px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
     }
 
-    .navbar-brand {
-      font-size: 26px;
+    * {
+      box-sizing: border-box;
+    }
+
+    header, .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #ffffff;
       font-weight: bold;
-      color: white;
-      text-decoration: none;
     }
 
-    .nav-links a {
-      color: white;
-      margin-left: 20px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #ffdd57;
+    nav a:hover {
+      color: #ffc107;
     }
 
     .container {
-      max-width: 1150px;
-      margin: 40px auto;
+      max-width: 900px;
+      margin: 30px auto;
       padding: 30px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.6);
     }
 
-    h2 {
-      color: #004aad;
-      margin-bottom: 30px;
-      text-align: center;
+    h1, h2 {
+      color: #ffc107;
     }
 
-    .form-row, .filters, .sort-row {
+    .form-row {
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
-      justify-content: space-between;
       margin-bottom: 20px;
     }
 
     select, input[type="date"], input[type="number"] {
-      flex: 1 1 160px;
-      padding: 12px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
       font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    select option {
+      color: black;
     }
 
     .search-btn {
-      background-color: #004aad;
+      width: 100%;
+      padding: 14px;
+      background-color: #007bff;
       color: white;
-      padding: 12px 24px;
+      font-size: 17px;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
+      margin-bottom: 20px;
     }
 
     .search-btn:hover {
-      background-color: #003380;
+      background-color: #0056b3;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 15px 0;
+      font-size: 15px;
     }
 
     .filters label {
-      background: #e4edff;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
     }
 
     .filters input {
-      margin-right: 6px;
+      margin-right: 5px;
     }
 
-    .sort-row label {
-      font-weight: 600;
-      align-self: center;
+    .sort-row {
+      margin: 15px 0;
+      font-size: 15px;
+    }
+
+    .sort-row select {
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
     }
 
     .hotel-list {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
     }
 
     .hotel-card {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      background: #fdfdff;
-      border: 1px solid #d2e3ff;
-      padding: 18px 24px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+      background-color: #fff;
+      color: #000;
+      padding: 20px;
+      border-radius: 10px;
     }
 
     .hotel-card strong {
       font-size: 18px;
-      color: #004aad;
-    }
-
-    .hotel-card p {
-      margin: 6px 0;
-      color: #555;
-      font-size: 15px;
+      color: #007bff;
     }
 
     .book-btn {
-      background: #00a36c;
-      color: white;
+      margin-top: 10px;
       padding: 10px 20px;
-      font-weight: 600;
+      background: #28a745;
+      color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
     .book-btn:hover {
-      background: #00814f;
+      background: #218838;
+    }
+
+    .no-results {
+      text-align: center;
+      font-style: italic;
+      color: #ccc;
+      margin-top: 20px;
     }
 
     @media (max-width: 768px) {
-      .form-row, .filters, .sort-row {
+      .form-row {
         flex-direction: column;
-      }
-
-      .hotel-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .book-btn {
-        margin-top: 12px;
-        width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-  <a class="navbar-brand" href="#">TravelGo</a>
-  <div class="nav-links">
+<header>
+  <h1>TravelGo</h1>
+  <nav>
     <a href="/">Home</a>
     <a href="/dashboard">Dashboard</a>
-    <a href="/hotel">Hotels</a>
-  </div>
-</nav>
+  </nav>
+</header>
 
-<!-- Hotel Booking Section -->
 <div class="container">
-  <h2>🏨 Book Your Perfect Stay</h2>
+  <h2>🏨 Find & Book Hotel Rooms</h2>
 
   <div class="form-row">
     <select id="location">
@@ -191,6 +203,7 @@
       <option value="Delhi">Delhi</option>
       <option value="Bangalore">Bangalore</option>
     </select>
+
     <input type="date" id="checkinDate" />
     <input type="date" id="checkoutDate" />
     <input type="number" id="numRooms" min="1" value="1" placeholder="No. of Rooms" />
@@ -220,7 +233,6 @@
   <div id="hotel-list" class="hotel-list"></div>
 </div>
 
-<!-- JavaScript -->
 <script>
   const hotels = [
     { name: "Taj Falaknuma Palace", location: "Hyderabad", pricePerNight: 25000, rating: 5, amenities: ["WiFi", "Pool", "Parking", "Restaurant"] },
@@ -232,14 +244,7 @@
     { name: "Hilton", location: "Bangalore", pricePerNight: 9000, rating: 5, amenities: ["WiFi", "Gym"] }
   ];
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const today = new Date().toISOString().split("T")[0];
-    const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
-    document.getElementById("checkinDate").value = today;
-    document.getElementById("checkoutDate").value = tomorrow;
-  });
-
-  document.getElementById("search-btn").addEventListener("click", () => {
+  function filterHotels() {
     const location = document.getElementById("location").value;
     const checkinDate = document.getElementById("checkinDate").value;
     const checkoutDate = document.getElementById("checkoutDate").value;
@@ -249,8 +254,8 @@
     const list = document.getElementById("hotel-list");
     list.innerHTML = "";
 
-    if (!location || !checkinDate || !checkoutDate || checkoutDate <= checkinDate) {
-      alert("Please select valid location and dates.");
+    if (!location || !checkinDate || !checkoutDate || numRooms < 1 || numGuests < 1) {
+      list.innerHTML = "<p class='no-results'>Please complete all fields to search.</p>";
       return;
     }
 
@@ -279,7 +284,7 @@
     else if (sort === "rating-high") filtered.sort((a, b) => b.rating - a.rating);
 
     if (filtered.length === 0) {
-      list.innerHTML = "<p>No hotels found for this location and filters.</p>";
+      list.innerHTML = "<p class='no-results'>No hotels found for this location and filters.</p>";
       return;
     }
 
@@ -287,16 +292,14 @@
       const card = document.createElement("div");
       card.className = "hotel-card";
       card.innerHTML = `
-        <div>
-          <strong>${hotel.name}</strong>
-          <p>${hotel.location} • ${hotel.rating}-Star • ₹${hotel.pricePerNight}/night</p>
-          <p><em>Amenities:</em> ${hotel.amenities.join(', ')}</p>
-        </div>
+        <strong>${hotel.name}</strong><br/>
+        ${hotel.location} • ${hotel.rating}-Star • ₹${hotel.pricePerNight}/night<br/>
+        <span style="font-size: 14px; color: #555;">Amenities: ${hotel.amenities.join(", ")}</span><br/>
         <button class="book-btn" onclick='bookHotel(${JSON.stringify(hotel)}, "${checkinDate}", "${checkoutDate}", ${numRooms}, ${numGuests})'>Book</button>
       `;
       list.appendChild(card);
     });
-  });
+  }
 
   function bookHotel(hotel, checkin, checkout, rooms, guests) {
     const params = new URLSearchParams({
@@ -311,6 +314,8 @@
     });
     window.location.href = `/confirm_hotel_details?${params.toString()}`;
   }
+
+  document.getElementById("search-btn").addEventListener("click", filterHotels);
 </script>
 
 </body>
