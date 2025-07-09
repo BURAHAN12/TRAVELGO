@@ -2,102 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Confirm Hotel Booking - TravelGo</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <style>
     body {
-      background: #f0f5ff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #eef4ff, #d2e0ff);
+      background-size: cover;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 0;
     }
 
     .container {
-      max-width: 650px;
-      margin: 60px auto;
-      background: white;
-      padding: 35px 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
     }
 
     h2 {
       color: #004aad;
-      margin-bottom: 24px;
       text-align: center;
-      font-weight: 600;
+      margin-bottom: 25px;
     }
 
     .detail-list {
-      list-style: none;
+      list-style-type: none;
       padding: 0;
-      font-size: 16px;
+      margin-bottom: 25px;
     }
 
     .detail-list li {
       margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .detail-label {
-      font-weight: 600;
+      font-size: 16px;
       color: #333;
     }
 
-    .total {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #2e7d32;
+    .detail-list strong {
+      color: #004aad;
     }
 
     .btn-confirm {
       display: block;
       width: 100%;
-      background-color: #28a745;
-      color: white;
       padding: 12px;
-      border: none;
-      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
       font-size: 16px;
       font-weight: bold;
-      margin-top: 25px;
-      transition: background 0.3s ease;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
 
     .btn-confirm:hover {
-      background-color: #218838;
+      background-color: #0056b3;
     }
 
-    @media screen and (max-width: 576px) {
+    @media (max-width: 600px) {
       .container {
-        margin: 30px 20px;
-        padding: 25px 20px;
+        margin: 20px;
+        padding: 20px;
       }
 
       .detail-list li {
         font-size: 15px;
-      }
-
-      h2 {
-        font-size: 22px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Confirm Your Hotel Booking</h2>
+    <h2>🏨 Confirm Your Hotel Booking</h2>
     <ul class="detail-list">
-      <li><span class="detail-label">Hotel:</span> {{ booking.name }}</li>
-      <li><span class="detail-label">Location:</span> {{ booking.location }}</li>
-      <li><span class="detail-label">Check-in:</span> {{ booking.checkin_date }}</li>
-      <li><span class="detail-label">Check-out:</span> {{ booking.checkout_date }}</li>
-      <li><span class="detail-label">Rooms:</span> {{ booking.num_rooms }}</li>
-      <li><span class="detail-label">Guests:</span> {{ booking.num_guests }}</li>
-      <li><span class="detail-label">Price/night:</span> ₹{{ booking.price_per_night }}</li>
-      <li><span class="detail-label">Total nights:</span> {{ booking.nights }}</li>
-      <li class="total">Total Cost: ₹{{ booking.price_per_night * booking.nights * booking.num_rooms }}</li>
+      <li><strong>Hotel:</strong> {{ booking.name }}</li>
+      <li><strong>Location:</strong> {{ booking.location }}</li>
+      <li><strong>Check-in:</strong> {{ booking.checkin_date }}</li>
+      <li><strong>Check-out:</strong> {{ booking.checkout_date }}</li>
+      <li><strong>Rooms:</strong> {{ booking.num_rooms }}</li>
+      <li><strong>Guests:</strong> {{ booking.num_guests }}</li>
+      <li><strong>Price/night:</strong> ₹{{ booking.price_per_night }}</li>
+      <li><strong>Total nights:</strong> {{ booking.nights }}</li>
     </ul>
 
     <form id="confirmForm" method="POST" action="{{ url_for('confirm_hotel_booking') }}">
